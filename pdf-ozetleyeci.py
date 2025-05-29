@@ -18,7 +18,7 @@ stopwords = set(nltk.corpus.stopwords.words('english'))
 # HuggingFace özetleme modeli
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
-# PDF'ten metin çıkar
+
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
     text = ""
@@ -72,7 +72,7 @@ def visualize_summary(summary_text):
 
     return bar_img, wc_img
 
-# GUI Uygulaması
+
 class PDFSummarizerApp:
     def __init__(self, master):
         self.master = master
@@ -108,16 +108,16 @@ class PDFSummarizerApp:
     def process_pdf(self, path):
         self.spinner.config(text="⏳ İşleniyor... Lütfen bekleyin.")
         self.button.config(state="disabled")
-        self.summary_text.config(state="disabled")  # <- kullanıcı yazamasın
+        self.summary_text.config(state="disabled")  
 
         try:
             text = extract_text_from_pdf(path)
             summary = summarize_text(text)
 
-            self.summary_text.config(state="normal")  # tekrar aç
+            self.summary_text.config(state="normal") 
             self.summary_text.delete(1.0, tk.END)
             self.summary_text.insert(tk.END, summary)
-            self.summary_text.config(state="disabled")  # yeniden kilitle
+            self.summary_text.config(state="disabled") 
 
             bar_img, wc_img = visualize_summary(summary)
             self.bar_label.config(image=bar_img)
